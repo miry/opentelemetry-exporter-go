@@ -72,6 +72,7 @@ func NewExporter(opts ...Option) (*Exporter, error) {
 	c := newConfig(opts...)
 	tracer := ls.NewTracer(c.options)
 
+	fmt.Printf("New exporter\n")
 	checkOptions := tracer.Options()
 	if err := checkOptions.Validate(); err != nil {
 		return nil, err
