@@ -3,6 +3,7 @@ package lightstep
 import (
 	"context"
 	"encoding/binary"
+	"fmt"
 	"sync"
 
 	"github.com/opentracing/opentracing-go/log"
@@ -53,7 +54,6 @@ func newConfig(opts ...Option) config {
 	var c config
 	var defaultOpts []Option
 
-	c.options.Verbose = true
 	for _, opt := range append(defaultOpts, opts...) {
 		opt(&c)
 	}
@@ -104,12 +104,14 @@ var _ trace.SpanSyncer = (*Exporter)(nil)
 // Close flushes all spans in the tracer to LightStep and then closes the tracer.
 // You should call Close() before your application exits.
 func (e *Exporter) Close() {
+	fmt.Printf("Close\n")
 	e.tracer.Close(context.Background())
 }
 
 // Flush forces all unflushed to flush.
 // This is normally handled by the exporter. However, you may call this to explicitly flush all spans without closing the exporter.
 func (e *Exporter) Flush() {
+	fmt.Printf("Flush\n")
 	e.tracer.Flush(context.Background())
 }
 
