@@ -53,6 +53,7 @@ func newConfig(opts ...Option) config {
 	var c config
 	var defaultOpts []Option
 
+	c.options.Verbose = true
 	for _, opt := range append(defaultOpts, opts...) {
 		opt(&c)
 	}
